@@ -70,9 +70,27 @@ open class XAxisRenderer: AxisRendererBase
             xAxis = self.axis as? XAxis
             else { return }
         
-        let longest = xAxis.getLongestLabel()
+        // let longest = xAxis.getLongestLabel()
         
-        let labelSize = longest.size(attributes: [NSFontAttributeName: xAxis.labelFont])
+        // let labelSize = longest.size(attributes: [NSFontAttributeName: xAxis.labelFont])
+        
+        var maxLabelWidth: CGFloat = 0.0
+        var maxLabelHegith: CGFloat = 0.0
+        
+        for i in 0 ..< xAxis.entries.count {
+            let text = xAxis.getFormattedLabel(i)
+            
+            let labelSize = text.size(attributes: [NSFontAttributeName: xAxis.labelFont])
+            
+            if labelSize.width > maxLabelWidth {
+                maxLabelWidth = labelSize.width
+            }
+            if labelSize.height > maxLabelHegith {
+                maxLabelHegith = labelSize.height
+            }
+        }
+        
+        let labelSize: CGSize = CGSize.init(width: maxLabelWidth, height: maxLabelHegith)
         
         let labelWidth = labelSize.width
         let labelHeight = labelSize.height
