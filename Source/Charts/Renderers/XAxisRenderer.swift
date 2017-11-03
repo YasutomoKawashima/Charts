@@ -80,7 +80,7 @@ open class XAxisRenderer: AxisRendererBase
         for i in 0 ..< xAxis.entries.count {
             let text = xAxis.getFormattedLabel(i)
             
-            let labelSize = text.size(attributes: [NSFontAttributeName: xAxis.labelFont])
+            let labelSize = text.size(withAttributes: [NSAttributedStringKey.font: xAxis.labelFont])
             
             if labelSize.width > maxLabelWidth {
                 maxLabelWidth = labelSize.width
